@@ -15,6 +15,7 @@ public class InputManager : MonoSingleton<InputManager>
     private void OnEnable()
     {
         inputActions?.Enable();
+        Debug.Log("inputActions Enabled");
     }
     private void OnDisable()
     {

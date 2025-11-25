@@ -8,7 +8,7 @@ public abstract class StateBase : IState
     protected Player player;
     protected PlayerStateMachine stateMachine;
     protected Animator animator;
-    protected PlayerInputManager inputManager;
+    protected InputManager inputManager;
     public StateBase(Player player)
     {
         this.player = player;
