@@ -433,7 +433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &872608243
 Transform:
   m_ObjectHideFlags: 0
@@ -662,7 +662,7 @@ MonoBehaviour:
     m_Bits: 64
   groundCheckRadius: 0.1
   bottomOffsetY: -0.99
-  OnFallingSpeedY: 0.01
+  OnFallingSpeedY: 0
   animator: {fileID: 0}
   <SettingData>k__BackingField: {fileID: 11400000, guid: 3f655416f5d36ad4dae18d18362f9ca5, type: 2}
 --- !u!95 &886113043

@@ -58,7 +58,8 @@ public abstract class StateBase : IState
         targetDir = new Vector2(inputManager.Movement.x, 0f);
         reusableData.targetHorizontalSpeed = targetDir.x * settingData.BaseSpeed;
 
-        player.transform.localScale = new Vector3((int)targetDir.x, 1f, 1f);
+        if (targetDir.x != 0)
+            player.transform.localScale = new Vector3((int)targetDir.x, 1f, 1f);
     }
     protected virtual void ChangeVelocity()
     {
