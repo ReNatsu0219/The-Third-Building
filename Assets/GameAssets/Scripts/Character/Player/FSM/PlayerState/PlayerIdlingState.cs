@@ -1,43 +1,69 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerIdlingState : StateBase
 {
-    private Vector2 InputMovement;
-    private Vector2 TargetMovement;
-    private Vector2 smoothVel;
-
     public PlayerIdlingState(Player player) : base(player)
     {
     }
+
+    #region IState Methods
     public override void OnEnter()
     {
+        base.OnEnter();
 
+        reusableData.aclTime = 0f;
     }
 
     public override void OnUpdate()
     {
-        InputMovement = player.InputManager.Movement;
-        InputMovement.y = 0;
-        TargetMovement = InputMovement * player.PlayerSpeed;
-        if (TargetMovement != Vector2.zero)
-            player.StateMachine.ChangeState(player.StateMachine.IdlingState);
+        base.OnUpdate();
+
+        reusableData.targetHorizontalSpeed = 0f;
     }
 
     public override void OnPhysicsUpdate()
     {
-        player.Regidbody.velocity =
-       Vector2.SmoothDamp(
-           player.Regidbody.velocity,
-           TargetMovement,
-           ref smoothVel,
-           player.velocitySmooth
-       );
+        if (!Mathf.Approximately(player.Rigidbody.velocity.sqrMagnitude, 0.1f))
+            ChangeVelocity();
     }
-
     public override void OnExit()
     {
+        base.OnExit();
 
+        reusableData.aclTime = 0f;
     }
+    #endregion
+
+    #region Reusable Methods
+    protected override void AddEventListener()
+    {
+        base.AddEventListener();
+
+        inputManager.inputActions.Gameplay.Move.started += OnMoveStarted;
+        inputManager.inputActions.Gameplay.Jump.started += OnJumpStrted;
+        player.isGrounded.OnValueChanged += OnFalling;
+    }
+
+
+
+    protected override void RemoveEventListener()
+    {
+        base.RemoveEventListener();
+
+        inputManager.inputActions.Gameplay.Move.started -= OnMoveStarted;
+        inputManager.inputActions.Gameplay.Jump.started -= OnJumpStrted;
+        player.isGrounded.OnValueChanged -= OnFalling;
+    }
+    #endregion
+
+    #region State Mtthods
+    private void OnMoveStarted(InputAction.CallbackContext context)
+    {
+        stateMachine.ChangeState(stateMachine.MovingState);
+    }
+    #endregion
 }

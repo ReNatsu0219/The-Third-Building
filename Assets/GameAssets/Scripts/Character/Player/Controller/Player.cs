@@ -3,38 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Player : PhysicsCheck
 {
     public Animator animator;
     public PlayerStateMachine StateMachine { get; private set; }
     public InputManager InputManager { get; private set; }
-    public Rigidbody2D Regidbody { get; private set; }
+    public Rigidbody2D Rigidbody { get; private set; }
 
-    public float PlayerSpeed;
-
-    public float velocitySmooth;
+    [field: SerializeField] public PlayerSO SettingData { get; private set; }
+    public PlayerStateReusableData ReusableData { get; private set; }
 
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
 
-        Regidbody=GetComponent<Rigidbody2D>();
+        Rigidbody = GetComponent<Rigidbody2D>();
 
         StateMachine = new PlayerStateMachine();
+        ReusableData = new PlayerStateReusableData(this);
 
         InputManager = InputManager.Instance;
 
         StateMachine.Initialize(this);
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         StateMachine.OnUpdate();
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         StateMachine.OnPhysicsUpdate();
     }
 }
