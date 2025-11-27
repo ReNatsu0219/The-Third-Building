@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IEatable
 {
-    public void BeEaten();
+    public bool BeEaten();
 }

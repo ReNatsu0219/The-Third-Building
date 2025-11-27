@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: PlayerSO
   m_EditorClassIdentifier: 
   <AccelerateTime>k__BackingField: 0.35
+  <BaseSpeed>k__BackingField: 5
+  <JumpForce>k__BackingField: 20
