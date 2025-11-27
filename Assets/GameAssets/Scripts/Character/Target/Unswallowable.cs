@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Unswallowable : MonoBehaviour, IEatable
 {
-    public bool BeEaten()
+    public virtual bool BeEaten()
     {
         Destroy(this.gameObject);
         return false;
