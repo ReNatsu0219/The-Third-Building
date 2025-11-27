@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IEatable
+public class PlayerManager : MonoSingleton<PlayerManager>
 {
-    public bool BeEaten();
+    public Player player;
 }

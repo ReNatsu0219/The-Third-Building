@@ -8,6 +8,7 @@ public class PlayerStateReusableData
 
     public float targetHorizontalSpeed;
     public float aclTime;
+    public float horizontalSpeedMultiplier = 1f;
 
     public PlayerStateReusableData(Player player)
     {

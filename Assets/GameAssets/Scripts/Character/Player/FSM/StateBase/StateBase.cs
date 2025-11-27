@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,18 +46,19 @@ public abstract class StateBase : IState
     #region Reusable Methods
     protected virtual void AddEventListener()
     {
-
+        inputManager.inputActions.Gameplay.Swallow.started += OnSwallowStarted;
     }
     protected virtual void RemoveEventListener()
     {
-
+        inputManager.inputActions.Gameplay.Swallow.started -= OnSwallowStarted;
     }
+
     protected virtual void UpdateTargetHorizontalSpeed()
     {
         if (targetDir.x != inputManager.Movement.x)
             reusableData.aclTime = 0f;
         targetDir = new Vector2(inputManager.Movement.x, 0f);
-        reusableData.targetHorizontalSpeed = targetDir.x * settingData.BaseSpeed;
+        reusableData.targetHorizontalSpeed = targetDir.x * settingData.BaseSpeed * reusableData.horizontalSpeedMultiplier;
 
         if (targetDir.x != 0)
             player.transform.localScale = new Vector3((int)targetDir.x, 1f, 1f);
@@ -73,7 +75,11 @@ public abstract class StateBase : IState
         reusableData.aclTime += Time.fixedDeltaTime;
 
     }
-    protected void OnJumpStrted(InputAction.CallbackContext context)
+    protected virtual void OnSwallowStarted(InputAction.CallbackContext context)
+    {
+        stateMachine.ChangeState(stateMachine.SwallowingState);
+    }
+    protected virtual void OnJumpStrted(InputAction.CallbackContext context)
     {
         stateMachine.ChangeState(stateMachine.JumpingState);
     }

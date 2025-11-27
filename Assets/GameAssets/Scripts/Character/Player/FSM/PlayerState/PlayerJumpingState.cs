@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerJumpingState : StateBase
 {
@@ -21,8 +22,8 @@ public class PlayerJumpingState : StateBase
     {
         UpdateTargetHorizontalSpeed();
 
-        if (player.Rigidbody.velocity.y <= player.OnFallingSpeedY) ;
-        stateMachine.ChangeState(stateMachine.FallingState);
+        if (player.Rigidbody.velocity.y <= player.OnFallingSpeedY)
+            stateMachine.ChangeState(stateMachine.FallingState);
     }
 
     public override void OnPhysicsUpdate()
@@ -35,16 +36,26 @@ public class PlayerJumpingState : StateBase
         base.AddEventListener();
 
         player.isGrounded.OnValueChanged += OnFallToLand;
+        inputManager.inputActions.Gameplay.Jump.started += OnJumpStrted;
     }
     protected override void RemoveEventListener()
     {
         base.RemoveEventListener();
 
         player.isGrounded.OnValueChanged -= OnFallToLand;
+        inputManager.inputActions.Gameplay.Jump.started -= OnJumpStrted;
     }
 
     private void Jump()
     {
-        player.Rigidbody.AddForce(Vector2.up * 10f, ForceMode2D.Impulse);
+        player.Rigidbody.AddForce(Vector2.up * settingData.JumpForce, ForceMode2D.Impulse);
+    }
+    protected override void OnJumpStrted(InputAction.CallbackContext context)
+    {
+        if (BuffManager.Instance.HasBuff<DoubleJumpBuff>())
+        {
+            BuffManager.Instance.RemoveBuff(BuffManager.Instance.GetBuff<DoubleJumpBuff>());
+            Jump();
+        }
     }
 }

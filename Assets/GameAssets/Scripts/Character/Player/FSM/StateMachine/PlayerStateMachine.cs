@@ -12,6 +12,7 @@ public class PlayerStateMachine : StateMachine
     public PlayerLandingState LandingState { get; private set; }
     public PlayerFallingState FallingState { get; private set; }
     public PlayerSwallowingState SwallowingState { get; private set; }
+    public PlayerChewingState ChewingState { get; private set; }
 
     public void Initialize(Player player)
     {
@@ -23,6 +24,7 @@ public class PlayerStateMachine : StateMachine
         LandingState = new PlayerLandingState(player);
         FallingState = new PlayerFallingState(player);
         SwallowingState = new PlayerSwallowingState(player);
+        ChewingState = new PlayerChewingState(player);
 
         ChangeState(IdlingState);
     }
