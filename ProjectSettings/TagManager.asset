@@ -41,3 +41,45 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background1
+    uniqueID: 3947029371
+    locked: 0
+  - name: Background2
+    uniqueID: 3800396291
+    locked: 0
+  - name: Background3
+    uniqueID: 3221689797
+    locked: 0
+  - name: Background4
+    uniqueID: 3571567605
+    locked: 0
+  - name: Midground1
+    uniqueID: 985906575
+    locked: 0
+  - name: Midground2
+    uniqueID: 3404150621
+    locked: 0
+  - name: Midground3
+    uniqueID: 1762075455
+    locked: 0
+  - name: Midground4
+    uniqueID: 566935789
+    locked: 0
+  - name: Object1
+    uniqueID: 3372153979
+    locked: 0
+  - name: Object2
+    uniqueID: 109668347
+    locked: 0
+  - name: Player
+    uniqueID: 2055331609
+    locked: 0
+  - name: Foreground1
+    uniqueID: 1755124311
+    locked: 0
+  - name: Foreground1
+    uniqueID: 2868738447
+    locked: 0
+  - name: UI
+    uniqueID: 3271743111
+    locked: 0
