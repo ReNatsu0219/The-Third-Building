@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,6 +17,7 @@ public class PlayerIdlingState : StateBase
         base.OnEnter();
 
         reusableData.aclTime = 0f;
+        AnimationManager.Instance.GetPlayerAnimator().SetBool("isIDIE", true);
     }
 
     public override void OnUpdate()
@@ -35,6 +37,7 @@ public class PlayerIdlingState : StateBase
         base.OnExit();
 
         reusableData.aclTime = 0f;
+        AnimationManager.Instance.GetPlayerAnimator().SetBool("isIDIE", false);
     }
     #endregion
 

@@ -7,6 +7,16 @@ public class PlayerFallingState : StateBase
     {
     }
 
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        AnimationManager.Instance.GetPlayerAnimator().SetBool("isFalling", true);
+    }
+    public override void OnExit()
+    {
+        base.OnExit();
+        AnimationManager.Instance.GetPlayerAnimator().SetBool("isFalling", false);
+    }
     public override void OnUpdate()
     {
         UpdateTargetHorizontalSpeed();

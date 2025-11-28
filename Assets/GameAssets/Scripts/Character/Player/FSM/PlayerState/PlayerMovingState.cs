@@ -14,6 +14,7 @@ public class PlayerMovingState : StateBase
         base.OnEnter();
 
         Debug.Log(player.InputManager.Movement);
+        AnimationManager.Instance.GetPlayerAnimator().SetBool("isMoving", true);
     }
 
     public override void OnUpdate()
@@ -29,6 +30,7 @@ public class PlayerMovingState : StateBase
     public override void OnExit()
     {
         base.OnExit();
+        AnimationManager.Instance.GetPlayerAnimator().SetBool("isMoving", false);
     }
     #endregion
 

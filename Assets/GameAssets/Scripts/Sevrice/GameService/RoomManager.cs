@@ -42,6 +42,7 @@ public class RoomManager : MonoSingleton<RoomManager>
 
         CurrentRoom = rooms[StartroomName];
         CurrentRoom.EnterRoom();
+        CameraManager.Instance.SetRoom(CurrentRoom);
     }
 
     public void SwitchtoRoom(string roomname)

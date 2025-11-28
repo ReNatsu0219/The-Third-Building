@@ -18,6 +18,8 @@ public class Player : PhysicsCheck
         animator = GetComponent<Animator>();
         Rigidbody = GetComponent<Rigidbody2D>();
 
+        AnimationManager.Instance.SetPlayerAnimator(animator);
+
         StateMachine = new PlayerStateMachine();
         ReusableData = new PlayerStateReusableData(this);
 

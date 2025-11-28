@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 2905320926590893325}
   - component: {fileID: 5855661979734694247}
   - component: {fileID: 605413892648472858}
+  - component: {fileID: 2347880323089353681}
   m_Layer: 0
   m_Name: RoomExit1
   m_TagString: Untagged
@@ -179,6 +180,23 @@ MonoBehaviour:
   TargetExit: {fileID: 0}
   EntryDirection: 0
   ExitDirection: 0
+--- !u!114 &2347880323089353681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748047359855535858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d4a4af76e7ad8e428132e1f3d8075c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FromRoom: {fileID: 0}
+  ToRoom: {fileID: 0}
+  TargetExit: {fileID: 0}
+  EntryDirection: 0
+  ExitDirection: 0
 --- !u!1 &2172688213325444708
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,7 +207,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2635375646731012206}
   - component: {fileID: 3463838270859543870}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,7 +256,7 @@ GameObject:
   - component: {fileID: 5506536436709523566}
   - component: {fileID: 8967689795975510289}
   - component: {fileID: 6651855209990883974}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -889,7 +907,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -934,7 +952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d4a4af76e7ad8e428132e1f3d8075c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FromRoom: {fileID: 6007313260262493372}
+  FromRoom: {fileID: 0}
   ToRoom: {fileID: 0}
   TargetExit: {fileID: 0}
   EntryDirection: 0
@@ -1174,6 +1192,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &7129397347764741069
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5943503113554319690}
+  m_Layer: 0
+  m_Name: Objects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5943503113554319690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7129397347764741069}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3011156805807555914}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7205920948601329268
 GameObject:
   m_ObjectHideFlags: 0
@@ -1414,7 +1463,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3011156805807555914}
-  - component: {fileID: 6007313260262493372}
+  - component: {fileID: 7767909609031338427}
   m_Layer: 0
   m_Name: ForestRoom
   m_TagString: Untagged
@@ -1439,9 +1488,10 @@ Transform:
   - {fileID: 1018121793327107707}
   - {fileID: 2635375646731012206}
   - {fileID: 6811710136023774992}
+  - {fileID: 5943503113554319690}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6007313260262493372
+--- !u!114 &7767909609031338427
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1450,9 +1500,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 9165672504368346031}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbcaa82d52515ca4d848d24cb054f90f, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f63e3224dc22da4c9cfcef28b1bd787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomName: Room_00
+  roomName: 
   is_active: 0
   is_entered: 0

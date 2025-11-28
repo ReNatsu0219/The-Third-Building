@@ -17,6 +17,13 @@ public class PlayerJumpingState : StateBase
         base.OnEnter();
 
         Jump();
+        AnimationManager.Instance.GetPlayerAnimator().SetBool("isJumping", true);
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        AnimationManager.Instance.GetPlayerAnimator().SetBool("isJumping", false);
     }
     public override void OnUpdate()
     {
@@ -56,6 +63,7 @@ public class PlayerJumpingState : StateBase
         {
             BuffManager.Instance.RemoveBuff(BuffManager.Instance.GetBuff<DoubleJumpBuff>());
             Jump();
+            AnimationManager.Instance.GetPlayerAnimator().SetBool("isJumping", false);
         }
     }
 }

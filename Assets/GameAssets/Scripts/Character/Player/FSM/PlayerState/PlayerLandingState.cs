@@ -8,6 +8,17 @@ public class PlayerLandingState : StateBase
     {
     }
 
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        AnimationManager.Instance.GetPlayerAnimator().SetBool("isLanding", true);
+    }
+    public override void OnExit()
+    {
+        base.OnExit();
+        AnimationManager.Instance.GetPlayerAnimator().SetBool("isLanding", false);
+    }
+
     public override void OnUpdate()
     {
         UpdateTargetHorizontalSpeed();
