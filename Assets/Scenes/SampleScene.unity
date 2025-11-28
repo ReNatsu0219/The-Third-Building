@@ -470,17 +470,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &365610700 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2818169859974883984, guid: 4e1d4e89869960f42ade55434e04a5da, type: 3}
-  m_PrefabInstance: {fileID: 3316377809854706344}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d4a4af76e7ad8e428132e1f3d8075c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,7 +942,7 @@ Transform:
   m_GameObject: {fileID: 872608242}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalPosition: {x: 2.33, y: 1.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1034,7 +1023,7 @@ GameObject:
   - component: {fileID: 886113043}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1098,8 +1087,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1}
-  m_Size: {x: 1, y: 2}
+  m_Offset: {x: 0, y: 1.0467892}
+  m_Size: {x: 1, y: 1.573698}
   m_Direction: 0
 --- !u!212 &886113040
 SpriteRenderer:
@@ -1162,7 +1151,7 @@ Transform:
   m_GameObject: {fileID: 886113037}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.04, y: -3.93, z: 0}
+  m_LocalPosition: {x: -4.29, y: -3.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1185,11 +1174,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundCheckRadius: 0.1
-  bottomOffsetY: 0
+  bottomOffsetY: 0.25
   OnFallingSpeedY: 0
   animator: {fileID: 0}
   swallow: {fileID: 872608245}
-  <SettingData>k__BackingField: {fileID: 0}
+  <SettingData>k__BackingField: {fileID: 11400000, guid: 37c3d9467c4591b44b0ed1526912aeb2, type: 2}
 --- !u!95 &886113043
 Animator:
   serializedVersion: 5
@@ -1211,6 +1200,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &986698239 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2818169859974883984, guid: 4e1d4e89869960f42ade55434e04a5da, type: 3}
+  m_PrefabInstance: {fileID: 1715144820}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d4a4af76e7ad8e428132e1f3d8075c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1144598631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1318,7 +1318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FromRoom: {fileID: 0}
   ToRoom: {fileID: 0}
-  TargetExit: {fileID: 365610700}
+  TargetExit: {fileID: 0}
   EntryDirection: 1
   ExitDirection: 0
 --- !u!4 &1209300158 stripped
@@ -1792,7 +1792,7 @@ PrefabInstance:
     - target: {fileID: 605413892648472858, guid: 4e1d4e89869960f42ade55434e04a5da, type: 3}
       propertyPath: TargetExit
       value: 
-      objectReference: {fileID: 365610700}
+      objectReference: {fileID: 986698239}
     - target: {fileID: 605413892648472858, guid: 4e1d4e89869960f42ade55434e04a5da, type: 3}
       propertyPath: EntryDirection
       value: 1
@@ -1848,6 +1848,10 @@ PrefabInstance:
     - target: {fileID: 3224235993977252108, guid: 4e1d4e89869960f42ade55434e04a5da, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5855661979734694247, guid: 4e1d4e89869960f42ade55434e04a5da, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 6007313260262493372, guid: 4e1d4e89869960f42ade55434e04a5da, type: 3}
       propertyPath: roomName
@@ -2444,6 +2448,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 891445899161588036, guid: 4e1d4e89869960f42ade55434e04a5da, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 2172688213325444708, guid: 4e1d4e89869960f42ade55434e04a5da, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -2512,10 +2520,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5418560624885040110, guid: 4e1d4e89869960f42ade55434e04a5da, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 6007313260262493372, guid: 4e1d4e89869960f42ade55434e04a5da, type: 3}
       propertyPath: EastExit
       value: 
-      objectReference: {fileID: 365610700}
+      objectReference: {fileID: 0}
     - target: {fileID: 6007313260262493372, guid: 4e1d4e89869960f42ade55434e04a5da, type: 3}
       propertyPath: WestExit
       value: 

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -65,7 +62,6 @@ public abstract class StateBase : IState
     }
     protected virtual void ChangeVelocity()
     {
-        Debug.Log($"VELCHECK: rb={player.Rigidbody}, reusable={reusableData}, setting={settingData}");
         float y = player.Rigidbody.velocity.y;
         player.Rigidbody.velocity =
                new Vector2(Mathf.Lerp(
