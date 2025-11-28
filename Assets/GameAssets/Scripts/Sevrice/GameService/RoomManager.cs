@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class RoomManager : MonoSingleton<RoomManager>
 {
@@ -92,7 +93,10 @@ public class RoomManager : MonoSingleton<RoomManager>
             
         CameraManager.Instance.SetRoom(GetRoom(exit.ToRoom.roomName));
 
-        player.transform.position = exit.TargetExit.transform.position;
+        player.transform.position = new Vector2(
+            exit.TargetExit.SpawnPoint.position.x, 
+            exit.TargetExit.SpawnPoint.position.y+(player.GetComponent<Collider2D>().bounds.size.y) / 2
+            );
 
         UIManager.Instance.GetBlackScreen().DOFade(0f, 0.4f);
         yield return new WaitForSeconds(0.4f);

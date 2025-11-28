@@ -17,6 +17,8 @@ public class RoomExit : MonoBehaviour
     public RoomBase ToRoom; 
     public RoomExit TargetExit;
 
+    public Transform SpawnPoint;
+
     public PlayerEntryDirection EntryDirection;
     public PlayerEntryDirection ExitDirection;
 
@@ -24,6 +26,7 @@ public class RoomExit : MonoBehaviour
     {
         if (FromRoom == null)
             FromRoom = GetComponentInParent<RoomBase>();
+        if(SpawnPoint==null)SpawnPoint = transform.Find("Spawnpoint");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
