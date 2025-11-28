@@ -12,8 +12,6 @@ public class PlayerMovingState : StateBase
     public override void OnEnter()
     {
         base.OnEnter();
-
-        Debug.Log(player.InputManager.Movement);
     }
 
     public override void OnUpdate()

@@ -11,7 +11,8 @@ public class DoubleJumpFruit : Swallowable
     }
     public override bool BeEaten()
     {
-        BuffManager.Instance.Addbuff(doubleJumpBuff);
+        if (canBeEaten)
+            BuffManager.Instance.Addbuff(doubleJumpBuff);
         return base.BeEaten();
     }
 }

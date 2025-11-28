@@ -6,6 +6,26 @@ using UnityEngine;
 public class BuffManager : MonoSingleton<BuffManager>
 {
     private List<Buff> activeBuffs = new List<Buff>();
+    public VoidEventSO loadDataEvent;
+
+    void OnEnable()
+    {
+        loadDataEvent.OnEventRaised += RemoveAllBuff;
+    }
+    void OnDisable()
+    {
+        loadDataEvent.OnEventRaised -= RemoveAllBuff;
+    }
+
+    private void RemoveAllBuff()
+    {
+        for (int i = activeBuffs.Count - 1; i >= 0; i--)
+        {
+            var buff = activeBuffs[i];
+
+            buff.OnRemove();
+        }
+    }
 
     void Update()
     {
