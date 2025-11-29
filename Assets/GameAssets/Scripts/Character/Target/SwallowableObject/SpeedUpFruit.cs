@@ -11,7 +11,8 @@ public class SpeedUpFruit : Swallowable
     }
     public override bool BeEaten()
     {
-        BuffManager.Instance.Addbuff(speedUpBuff);
+        if (canBeEaten)
+            BuffManager.Instance.Addbuff(speedUpBuff);
         return base.BeEaten();
     }
 }

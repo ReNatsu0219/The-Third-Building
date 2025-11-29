@@ -2,18 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SavePoint : MonoBehaviour, IEatable
+public class SavePoint : MonoBehaviour
 {
     public VoidEventSO SaveEventSO;
-    public bool isDone;
+    public bool isDone = false;
 
-    public bool BeEaten()
+    void OnTriggerEnter2D(Collider2D coll)
     {
-        if (!isDone)
+        if (coll.CompareTag("Player") && !isDone)
         {
             isDone = true;
             SaveEventSO.RaiseEvent();
         }
-        return false;
     }
 }

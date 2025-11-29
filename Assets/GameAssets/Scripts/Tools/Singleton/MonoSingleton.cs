@@ -3,10 +3,13 @@ using UnityEngine;
 public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
 {
     private static T _instance;
+    private static bool applicationIsQuiting = false;
     public static T Instance
     {
         get
         {
+            if (applicationIsQuiting)
+                return _instance;
             if (_instance == null)
             {
                 _instance = FindObjectOfType<T>() as T;
@@ -33,5 +36,9 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
         {
             Destroy(gameObject);
         }
+    }
+    protected virtual void OnDestroy()
+    {
+        applicationIsQuiting = true;
     }
 }

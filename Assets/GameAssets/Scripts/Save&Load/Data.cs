@@ -21,11 +21,11 @@ public class Data
 public class SerializableVector3
 {
     public float x, y, z;
-    public void SerializeVector3(Vector3 v3)
+    public SerializableVector3(Vector3 v3)
     {
-        x = v3.x;
-        y = v3.y;
-        z = v3.z;
+        this.x = v3.x;
+        this.y = v3.y;
+        this.z = v3.z;
     }
     public Vector3 ToVector3()
     {

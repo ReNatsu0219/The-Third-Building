@@ -1,17 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Newtonsoft.Json;
 using System.IO;
-using System;
 
+[DefaultExecutionOrder(-10)]
 public class DataManager : MonoSingleton<DataManager>
 {
-    [SerializeField] private VoidEventSO loadGameEvent;
-    [SerializeField] private VoidEventSO saveGameEvent;
     private List<ISaveable> saveableList = new List<ISaveable>();
     private Data saveData;
     private string jsonFolder;
+    [field: Header("Event System")]
+    [SerializeField] private VoidEventSO loadGameEvent;
+    [SerializeField] private VoidEventSO saveGameEvent;
 
     protected override void Awake()
     {
@@ -25,11 +25,17 @@ public class DataManager : MonoSingleton<DataManager>
     {
         saveGameEvent.OnEventRaised += Save;
         loadGameEvent.OnEventRaised += Load;
+
+        InputManager.Instance.inputActions.Gameplay.Save.started += ctx => saveGameEvent.RaiseEvent();
+        InputManager.Instance.inputActions.Gameplay.Load.started += ctx => loadGameEvent.RaiseEvent();
     }
     void OnDisable()
     {
         saveGameEvent.OnEventRaised -= Save;
         loadGameEvent.OnEventRaised -= Load;
+
+        InputManager.Instance.inputActions.Gameplay.Save.started -= ctx => saveGameEvent.RaiseEvent();
+        InputManager.Instance.inputActions.Gameplay.Load.started -= ctx => loadGameEvent.RaiseEvent();
     }
 
     private void Save()
@@ -42,9 +48,11 @@ public class DataManager : MonoSingleton<DataManager>
         var jsonData = JsonConvert.SerializeObject(saveData);
         if (!File.Exists(resultPath))
         {
-            Directory.CreateDirectory(resultPath);
+            Directory.CreateDirectory(jsonFolder);
         }
         File.WriteAllText(resultPath, jsonData);
+        //Debug.Log(jsonData);
+
     }
     private void Load()
     {
