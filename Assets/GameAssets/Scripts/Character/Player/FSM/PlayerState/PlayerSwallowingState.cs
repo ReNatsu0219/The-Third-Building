@@ -19,6 +19,7 @@ public class PlayerSwallowingState : StateBase
 
         //TestSetting
         TryToEat();
+        player.StartCoroutine(SwallowTimeout());
 
     }
     public override void OnUpdate()
@@ -33,5 +34,16 @@ public class PlayerSwallowingState : StateBase
     protected override void OnSwallowStarted(InputAction.CallbackContext context)
     {
 
+    }
+
+    private IEnumerator SwallowTimeout()
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (player.StateMachine.currentState != player.StateMachine.SwallowingState)
+            yield break;
+
+
+        player.swallow.gameObject.SetActive(false);
+        player.StateMachine.ChangeState(player.StateMachine.IdlingState);
     }
 }

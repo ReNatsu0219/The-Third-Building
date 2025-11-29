@@ -20,6 +20,7 @@ public abstract class Swallowable : MonoBehaviour, IEatable, ISaveable
             r.color = new Color(255f, 255f, 255f, 0f);
             canBeEaten = false;
             timer = recoverTime;
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.Bite);
             return true;
         }
         else
@@ -55,7 +56,7 @@ public abstract class Swallowable : MonoBehaviour, IEatable, ISaveable
         return GetComponent<DataDefination>();
     }
 
-    public void GetSaveData(Data data)
+    public virtual void GetSaveData(Data data)
     {
         if (data.characterPosDict.ContainsKey(GetDataID().ID))
         {
@@ -67,7 +68,7 @@ public abstract class Swallowable : MonoBehaviour, IEatable, ISaveable
         }
     }
 
-    public void LoadData(Data data)
+    public virtual void LoadData(Data data)
     {
         canBeEaten = true;
         if (data.characterPosDict.ContainsKey(GetDataID().ID))
