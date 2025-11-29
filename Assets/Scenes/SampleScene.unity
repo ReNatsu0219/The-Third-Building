@@ -1258,7 +1258,10 @@ MonoBehaviour:
   OnFallingSpeedY: 0
   animator: {fileID: 886113043}
   swallow: {fileID: 872608245}
-  <SettingData>k__BackingField: {fileID: 11400000, guid: 37c3d9467c4591b44b0ed1526912aeb2, type: 2}
+  <SettingData>k__BackingField: {fileID: 11400000, guid: b7c301bc8850a0542a25265aab198760, type: 2}
+  isDead: 0
+  PlayerDeathEvent: {fileID: 11400000, guid: 6da3925f9832ad44baf3cf56c666052f, type: 2}
+  LoadGameEvent: {fileID: 11400000, guid: c45bd9823e55b3f428a479aac5ecb722, type: 2}
 --- !u!95 &886113043
 Animator:
   serializedVersion: 5
@@ -37038,6 +37041,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3732512188240747983, guid: 7d93f84c0dea5fd4e947297949507fe9, type: 3}
+      propertyPath: loadDataEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: c45bd9823e55b3f428a479aac5ecb722, type: 2}
     - target: {fileID: 4048551752939670621, guid: 7d93f84c0dea5fd4e947297949507fe9, type: 3}
       propertyPath: m_Name
       value: Buff Manager
