@@ -9,6 +9,7 @@ public class UIManager : MonoSingleton<UIManager>
 {
     [field: Header("Canvas")]
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject room_05Panel;
     [SerializeField] private Image deathPanel;
     [SerializeField] private Image deathMask;
 
@@ -28,6 +29,7 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private VoidEventSO loadGameEvent;
     [SerializeField] private VoidEventSO pauseEvent;
     [SerializeField] private VoidEventSO playerDeathEvent;
+    [SerializeField] private RoomChangeEventSO roomChangeEvent;
 
     protected override void Awake()
     {
@@ -41,15 +43,15 @@ public class UIManager : MonoSingleton<UIManager>
     {
         pauseEvent.OnEventRaised += TogglePausePanel;
         playerDeathEvent.OnEventRaised += OnPlayerDeathEvent;
+        roomChangeEvent.OnEventRaised += OnRoomChangeEvent;
     }
 
     void OnDisable()
     {
         pauseEvent.OnEventRaised -= TogglePausePanel;
-        playerDeathEvent.OnEventRaised += OnPlayerDeathEvent;
+        playerDeathEvent.OnEventRaised -= OnPlayerDeathEvent;
+        roomChangeEvent.OnEventRaised -= OnRoomChangeEvent;
     }
-
-
 
     private void Start()
     {
@@ -109,6 +111,17 @@ public class UIManager : MonoSingleton<UIManager>
     private void OnPlayerDeathEvent()
     {
         StartCoroutine(DeathMaskCoroutine());
+    }
+    private void OnRoomChangeEvent(RoomBase currentRoom)
+    {
+        if (currentRoom.roomName != "Room_05")
+        {
+            room_05Panel.SetActive(false);
+        }
+        else
+        {
+            room_05Panel.SetActive(true);
+        }
     }
     #region Death Mask
     private IEnumerator DeathMaskCoroutine()

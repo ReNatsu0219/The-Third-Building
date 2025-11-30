@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
+[DefaultExecutionOrder(-9)]
 public class RoomManager : MonoSingleton<RoomManager>
 {
     public RoomBase[] Roomslist;
@@ -15,6 +16,8 @@ public class RoomManager : MonoSingleton<RoomManager>
     public Dictionary<string, RoomBase> rooms = new Dictionary<string, RoomBase>();
 
     public bool IsTransitioning = false;
+
+    [SerializeField] private RoomChangeEventSO roomChangeEventSO;
 
     protected override void Awake()
     {
@@ -43,6 +46,7 @@ public class RoomManager : MonoSingleton<RoomManager>
 
         CurrentRoom = rooms[StartroomName];
         CurrentRoom.EnterRoom();
+        roomChangeEventSO.RaiseEvent(CurrentRoom);
         CameraManager.Instance.SetRoom(CurrentRoom);
     }
 
@@ -61,6 +65,7 @@ public class RoomManager : MonoSingleton<RoomManager>
 
         CurrentRoom = rooms[roomname];
         CurrentRoom.EnterRoom();
+        roomChangeEventSO.RaiseEvent(CurrentRoom);
     }
 
     public RoomBase GetRoom(string roomname)
@@ -90,12 +95,12 @@ public class RoomManager : MonoSingleton<RoomManager>
 
         SwitchtoRoom(exit.ToRoom.roomName);
         yield return null;
-            
+
         CameraManager.Instance.SetRoom(GetRoom(exit.ToRoom.roomName));
 
         player.transform.position = new Vector2(
-            exit.TargetExit.SpawnPoint.position.x, 
-            exit.TargetExit.SpawnPoint.position.y+(player.GetComponent<Collider2D>().bounds.size.y) / 2
+            exit.TargetExit.SpawnPoint.position.x,
+            exit.TargetExit.SpawnPoint.position.y + (player.GetComponent<Collider2D>().bounds.size.y) / 2
             );
 
         UIManager.Instance.GetBlackScreen().DOFade(0f, 0.4f);
