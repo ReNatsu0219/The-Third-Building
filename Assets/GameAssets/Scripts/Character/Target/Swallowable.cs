@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Swallowable : MonoBehaviour, IEatable, ISaveable
 {
     [SerializeField] protected float recoverTime;
+    [SerializeField] protected GameObject spitParticle;
     protected float timer;
     protected bool canBeEaten = true;
     protected SpriteRenderer r;
@@ -17,6 +18,8 @@ public abstract class Swallowable : MonoBehaviour, IEatable, ISaveable
         //物体不会设置为false，请通过动画/图案表示状态
         if (canBeEaten)
         {
+            if (spitParticle != null)
+                Instantiate(spitParticle, transform);
             r.color = new Color(255f, 255f, 255f, 0f);
             canBeEaten = false;
             timer = recoverTime;
