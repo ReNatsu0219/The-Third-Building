@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3846065316018783757}
-  - component: {fileID: 6165471295097908200}
+  - component: {fileID: 7035573445327465934}
   - component: {fileID: 4488758819043098691}
   - component: {fileID: 6627317375754101526}
   - component: {fileID: 5007034361527002749}
@@ -35,7 +35,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6165471295097908200
+--- !u!114 &7035573445327465934
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,10 +44,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 9144416424570623951}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f56015a6edd4fb945b96e643592ab559, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fc6ec943f7b707439a0a5f36bc1d22a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   recoverTime: 0
+  pauseEvent: {fileID: 11400000, guid: e3a651c8a53cce1438a9a9eacf8223d7, type: 2}
+  fallingSpeed: 0
 --- !u!114 &4488758819043098691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,7 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   persistentType: 0
-  ID: 45687101-f978-4b9b-9757-a63ec8aa9599
+  ID: d17796f8-9107-4b04-af42-c8266d083679
 --- !u!212 &6627317375754101526
 SpriteRenderer:
   m_ObjectHideFlags: 0

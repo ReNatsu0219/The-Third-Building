@@ -4,6 +4,8 @@ using UnityEngine.Windows;
 
 public class PlayerMovingState : StateBase
 {
+    private float stepTimer = 0f;
+    private float stepInterval = 0.35f;
     public PlayerMovingState(Player player) : base(player)
     {
 
@@ -20,6 +22,7 @@ public class PlayerMovingState : StateBase
     public override void OnUpdate()
     {
         UpdateTargetHorizontalSpeed();
+        PlayFootStep();
     }
 
     public override void OnPhysicsUpdate()
@@ -33,7 +36,17 @@ public class PlayerMovingState : StateBase
         AnimationManager.Instance.GetPlayerAnimator().SetBool("isMoving", false);
     }
     #endregion
+    private void PlayFootStep()
+    {
+        stepTimer += Time.deltaTime;
 
+        if (stepTimer >= stepInterval)
+        {
+            AudioManager.Instance.PlayRandomSFX(AudioManager.Instance.Step);
+
+            stepTimer = 0f;
+        }
+    }
     #region Reusable Methods
     protected override void AddEventListener()
     {

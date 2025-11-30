@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DoubleJump
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 0fe37324b9706984b9a5de76fb1355d7, type: 3}
-  volume: 7
+  volume: 5

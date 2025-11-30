@@ -99,7 +99,10 @@ public class Player : PhysicsCheck, ISaveable
 
     public void EatDone()
     {
-        AnimationManager.Instance.GetPlayerAnimator().SetBool("Eat", false);
+        if (StateMachine.currentState == StateMachine.SwallowingState)
+        {
+            StateMachine.ChangeState(StateMachine.IdlingState);
+        }
     }
 
     #endregion

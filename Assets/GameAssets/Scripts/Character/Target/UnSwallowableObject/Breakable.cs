@@ -6,6 +6,7 @@ public class Breakable : Unswallowable
 {
     public override bool BeEaten()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.Break);
         this.gameObject.SetActive(false);
         return false;
     }

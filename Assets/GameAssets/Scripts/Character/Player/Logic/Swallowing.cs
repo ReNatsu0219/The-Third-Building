@@ -1,15 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Swallowing : MonoBehaviour
 {
     public Player player;
     public bool isMasticable;
+    public bool Detected=false;
+
+    private Animator biteAnimator;
+    private Collider2D trigger;
+
+    void Awake()
+    {
+        biteAnimator = GetComponent<Animator>();
+        trigger = GetComponent<Collider2D>();
+    }
+
     void OnEnable()
     {
-
+        isMasticable = false;
+        if (trigger != null)
+            trigger.enabled = true;
     }
+
     void OnDisable()
     {
         isMasticable = false;
@@ -19,22 +31,38 @@ public class Swallowing : MonoBehaviour
     {
         Swallow(coll);
     }
+
     private void Swallow(Collider2D coll)
     {
+        Detected = true;
         var masticable = coll.GetComponent<IEatable>()?.BeEaten();
-        if (masticable == null)
+        bool canEat = masticable != null && (bool)masticable;
+
+        if (canEat)
         {
-            isMasticable = false;
-            AnimationManager.Instance.GetPlayerAnimator().SetBool("Bite", true);
-            player.StateMachine.ChangeState(player.StateMachine.IdlingState);
-            this.gameObject.SetActive(false);
+            isMasticable = true;
+
+            AnimationManager.Instance.GetPlayerAnimator().SetBool("Eat", true);
         }
         else
         {
-            isMasticable = (bool)masticable;
-            AnimationManager.Instance.GetPlayerAnimator().SetBool("Eat", true);
-            player.StateMachine.ChangeState(player.StateMachine.IdlingState);
-            this.gameObject.SetActive(false);
+            isMasticable = false;
+
+            biteAnimator.SetTrigger("Bite");
         }
+
+        if (trigger != null)
+            trigger.enabled = false;
+
+    }
+
+    public void OnBiteAnimationEnd()
+    {
+        if (player.StateMachine.currentState == player.StateMachine.SwallowingState)
+        {
+            player.StateMachine.ChangeState(player.StateMachine.IdlingState);
+        }
+        Detected = false;
+        gameObject.SetActive(false);
     }
 }

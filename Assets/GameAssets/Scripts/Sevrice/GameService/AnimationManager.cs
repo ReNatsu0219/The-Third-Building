@@ -6,6 +6,8 @@ using UnityEngine;
 public class AnimationManager : MonoSingleton<AnimationManager>
 {
     public Animator PlayerAnimator;
+    public Animator BiteAnimatorFWD;
+    public Animator BiteAnimatorDWD;
 
     protected override void Awake()
     {
@@ -20,5 +22,15 @@ public class AnimationManager : MonoSingleton<AnimationManager>
     public Animator GetPlayerAnimator()
     {
         return PlayerAnimator;
+    }
+
+    public Animator GetBiteAnimatorFWD()
+    {
+        return BiteAnimatorFWD;
+    }
+
+    public Animator GetBiteAnimatorDWD()
+    {
+        return BiteAnimatorDWD;
     }
 }

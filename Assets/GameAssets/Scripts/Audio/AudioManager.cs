@@ -24,7 +24,6 @@ public class AudioManager : MonoSingleton<AudioManager>
 
     protected override void Awake()
     {
-        base.Awake();
         Jump = Resources.Load<AudioData>("Jump");
         Step = Resources.Load<AudioData>("Step");
         Bite = Resources.Load<AudioData>("Bite");

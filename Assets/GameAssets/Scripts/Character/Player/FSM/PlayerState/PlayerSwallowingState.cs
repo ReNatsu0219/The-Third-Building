@@ -7,6 +7,7 @@ public class PlayerSwallowingState : StateBase
 {
     private Swallowing swallowFwd;
     private Swallowing swallowDwd;
+
     public PlayerSwallowingState(Player player) : base(player)
     {
         swallowFwd = player.swallowFwd;
@@ -19,40 +20,40 @@ public class PlayerSwallowingState : StateBase
 
         reusableData.aclTime = 0f;
 
-        //TestSetting
         TryToEat();
-        player.StartCoroutine(SwallowTimeout());
 
     }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+
+        if (swallowFwd != null)
+            swallowFwd.gameObject.SetActive(false);
+        if (swallowDwd != null)
+            swallowDwd.gameObject.SetActive(false);
+
+        AnimationManager.Instance.GetPlayerAnimator().SetBool("Eat", false);
+    }
+
     public override void OnUpdate()
     {
         base.OnUpdate();
-
+        if (!swallowFwd.Detected) AnimationManager.Instance.GetBiteAnimatorFWD().SetTrigger("Bite");
+        if (!swallowDwd.Detected) AnimationManager.Instance.GetBiteAnimatorDWD().SetTrigger("Bite");
     }
+
     private void TryToEat()
     {
-        //Press "Down" to eat downward.
+        // Press "Down" to eat downward.
         if (InputManager.Instance.inputActions.Gameplay.Move.ReadValue<Vector2>().y >= 0f)
             player.swallowFwd.gameObject.SetActive(true);
         else
             player.swallowDwd.gameObject.SetActive(true);
     }
+
     protected override void OnSwallowStarted(InputAction.CallbackContext context)
     {
 
-    }
-
-    private IEnumerator SwallowTimeout()
-    {
-        yield return new WaitForSeconds(0.1f);
-        if (player.StateMachine.currentState != player.StateMachine.SwallowingState)
-            yield break;
-
-
-        if (InputManager.Instance.inputActions.Gameplay.Move.ReadValue<Vector2>().y >= 0f)
-            player.swallowFwd.gameObject.SetActive(false);
-        else
-            player.swallowDwd.gameObject.SetActive(false);
-        player.StateMachine.ChangeState(player.StateMachine.IdlingState);
     }
 }

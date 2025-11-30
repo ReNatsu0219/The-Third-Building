@@ -46,8 +46,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d392eed937759c489c9ba77e2620a33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFXPlayer: {fileID: 0}
-  BGMPlayer: {fileID: 0}
+  SFXPlayer: {fileID: 8677275639533089071}
+  BGMPlayer: {fileID: 6232720801764532471}
+  Jump: {fileID: 11400000, guid: 55a05bfc4bbc1354fb0a0d85b9a526b7, type: 2}
+  Step: {fileID: 11400000, guid: c78494bba0065ed43a580671e5e26e21, type: 2}
+  Bite: {fileID: 11400000, guid: c78494bba0065ed43a580671e5e26e21, type: 2}
+  DoubleJump: {fileID: 11400000, guid: 197351b362fa9e742b62ff7b64e58c48, type: 2}
+  Break: {fileID: 11400000, guid: d341482c30d4b2f499c9c29a8a34dbf6, type: 2}
+  Wind: {fileID: 11400000, guid: 3097ff631e35d3e43bd93e0bedc5b82e, type: 2}
+  BGM: {fileID: 11400000, guid: 67b3107df46538546ab6c2694aff1e6e, type: 2}
+  audioMixer: {fileID: 24100000, guid: ad53971e1b3131f43960b5b2ee45b987, type: 2}
+  volumeChangeEvent: {fileID: 11400000, guid: a9bf66997afa84f4faa45a5ed023dc02, type: 2}
 --- !u!82 &8677275639533089071
 AudioSource:
   m_ObjectHideFlags: 0
@@ -58,7 +67,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 4d99bdc0fb172a049bcff64ad11ac910, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -154,7 +163,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d3d8f71a8d0bdcf4f931c21f8b4d3e5e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

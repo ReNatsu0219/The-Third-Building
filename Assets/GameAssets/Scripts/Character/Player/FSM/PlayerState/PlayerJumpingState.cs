@@ -64,7 +64,10 @@ public class PlayerJumpingState : StateBase
         {
             BuffManager.Instance.RemoveBuff(BuffManager.Instance.GetBuff<DoubleJumpBuff>());
             Jump();
+
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.DoubleJump);
             AnimationManager.Instance.GetPlayerAnimator().SetBool("isJumping", false);
+            AnimationManager.Instance.GetPlayerAnimator().SetTrigger("DoubleJump");
         }
     }
 }
