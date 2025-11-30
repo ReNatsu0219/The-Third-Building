@@ -8,7 +8,8 @@ public class Player : PhysicsCheck, ISaveable
     public PlayerStateMachine StateMachine { get; private set; }
     public InputManager InputManager { get; private set; }
     public Rigidbody2D Rigidbody { get; private set; }
-    public Swallowing swallow;
+    public Swallowing swallowFwd;
+    public Swallowing swallowDwd;
 
     [field: SerializeField] public PlayerSO SettingData { get; private set; }
     public PlayerStateReusableData ReusableData { get; private set; }
@@ -17,8 +18,8 @@ public class Player : PhysicsCheck, ISaveable
     public bool isDead = false;
 
     [field: Header("Event Listener")]
-    [SerializeField] private VoidEventSO PlayerDeathEvent;
-    [SerializeField] private VoidEventSO LoadGameEvent;
+    [SerializeField] private VoidEventSO playerDeathEvent;
+    [SerializeField] private VoidEventSO loadGameEvent;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -38,11 +39,20 @@ public class Player : PhysicsCheck, ISaveable
         ISaveable saveable = this;
         saveable.RegisterSaveData();
 
-        LoadGameEvent.OnEventRaised += PlayerOnLoadGameEvent;
+        //测试死亡 下同
+        InputManager.Instance.inputActions.Gameplay.Die.started += TestDie;
+
+        loadGameEvent.OnEventRaised += PlayerOnLoadGameEvent;
     }
     void OnDisable()
     {
-        LoadGameEvent.OnEventRaised -= PlayerOnLoadGameEvent;
+        InputManager.Instance.inputActions.Gameplay.Die.started -= TestDie;
+        loadGameEvent.OnEventRaised -= PlayerOnLoadGameEvent;
+    }
+
+    private void TestDie(InputAction.CallbackContext context)
+    {
+        PlayerDead();
     }
 
     protected override void Update()
@@ -64,19 +74,17 @@ public class Player : PhysicsCheck, ISaveable
         if (coll.CompareTag("Water"))
         {
             PlayerDead();
-            PlayerDeathEvent.RaiseEvent();
         }
         //可以用来播放不同的动画
         else if (coll.CompareTag("Spike"))
         {
             PlayerDead();
-            PlayerDeathEvent.RaiseEvent();
         }
     }
     private void PlayerDead()
     {
+        playerDeathEvent.RaiseEvent();
         isDead = true;
-        InputManager.inputActions.Gameplay.Disable();
     }
     #region Event Methods
     private void PlayerOnLoadGameEvent()

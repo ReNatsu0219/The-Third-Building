@@ -5,10 +5,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerSwallowingState : StateBase
 {
-    private Swallowing swallow;
+    private Swallowing swallowFwd;
+    private Swallowing swallowDwd;
     public PlayerSwallowingState(Player player) : base(player)
     {
-        swallow = player.swallow;
+        swallowFwd = player.swallowFwd;
+        swallowDwd = player.swallowDwd;
     }
 
     public override void OnEnter()
@@ -28,7 +30,11 @@ public class PlayerSwallowingState : StateBase
     }
     private void TryToEat()
     {
-        player.swallow.gameObject.SetActive(true);
+        //Press "Down" to eat downward.
+        if (InputManager.Instance.inputActions.Gameplay.Move.ReadValue<Vector2>().y >= 0f)
+            player.swallowFwd.gameObject.SetActive(true);
+        else
+            player.swallowDwd.gameObject.SetActive(true);
     }
     protected override void OnSwallowStarted(InputAction.CallbackContext context)
     {

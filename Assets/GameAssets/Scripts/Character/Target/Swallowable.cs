@@ -29,6 +29,10 @@ public abstract class Swallowable : MonoBehaviour, IEatable, ISaveable
     }
     protected virtual void Update()
     {
+        //负数或0表示不恢复
+        if (recoverTime <= 0)
+            return;
+
         if (!canBeEaten && timer >= 0f)
         {
             timer -= Time.deltaTime;
@@ -45,7 +49,7 @@ public abstract class Swallowable : MonoBehaviour, IEatable, ISaveable
         ISaveable saveable = this;
         saveable.RegisterSaveData();
     }
-    void OnDisable()
+    protected virtual void OnDisable()
     {
         ISaveable saveable = this;
         saveable.UnRegisterSaveData();
@@ -55,7 +59,7 @@ public abstract class Swallowable : MonoBehaviour, IEatable, ISaveable
         return GetComponent<DataDefination>();
     }
 
-    public void GetSaveData(Data data)
+    public virtual void GetSaveData(Data data)
     {
         if (data.characterPosDict.ContainsKey(GetDataID().ID))
         {
@@ -67,9 +71,9 @@ public abstract class Swallowable : MonoBehaviour, IEatable, ISaveable
         }
     }
 
-    public void LoadData(Data data)
+    public virtual void LoadData(Data data)
     {
-        canBeEaten = true;
+        timer = -1f;
         if (data.characterPosDict.ContainsKey(GetDataID().ID))
         {
             transform.position = data.characterPosDict[GetDataID().ID].ToVector3();

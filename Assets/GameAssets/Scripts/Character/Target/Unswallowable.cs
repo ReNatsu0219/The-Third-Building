@@ -66,7 +66,7 @@ public class Unswallowable : MonoBehaviour, IEatable, ISaveable
 
     public virtual void LoadData(Data data)
     {
-        canBeEaten = true;
+        timer = -1f;
         if (data.characterPosDict.ContainsKey(GetDataID().ID))
         {
             transform.position = data.characterPosDict[GetDataID().ID].ToVector3();
