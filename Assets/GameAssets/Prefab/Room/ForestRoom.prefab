@@ -209,7 +209,7 @@ MonoBehaviour:
   FromRoom: {fileID: 7767909609031338427}
   ToRoom: {fileID: 0}
   TargetExit: {fileID: 0}
-  SpawnPoint: {fileID: 580399260531251746}
+  SpawnPoint: {fileID: 0}
   EntryDirection: 1
   ExitDirection: 0
 --- !u!1 &2172688213325444708

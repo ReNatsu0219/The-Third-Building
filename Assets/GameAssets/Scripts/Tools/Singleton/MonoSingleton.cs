@@ -34,7 +34,6 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
         }
         else
         {
-            Destroy(gameObject);
         }
     }
     protected virtual void OnDestroy()
