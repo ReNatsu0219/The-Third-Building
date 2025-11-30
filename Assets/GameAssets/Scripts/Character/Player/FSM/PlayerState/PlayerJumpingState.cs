@@ -18,6 +18,7 @@ public class PlayerJumpingState : StateBase
 
         Jump();
         AnimationManager.Instance.GetPlayerAnimator().SetBool("isJumping", true);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.Jump);
     }
 
     public override void OnExit()

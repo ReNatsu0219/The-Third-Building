@@ -25,12 +25,14 @@ public class Swallowing : MonoBehaviour
         if (masticable == null)
         {
             isMasticable = false;
+            AnimationManager.Instance.GetPlayerAnimator().SetBool("Bite", true);
             player.StateMachine.ChangeState(player.StateMachine.IdlingState);
             this.gameObject.SetActive(false);
         }
         else
         {
             isMasticable = (bool)masticable;
+            AnimationManager.Instance.GetPlayerAnimator().SetBool("Eat", true);
             player.StateMachine.ChangeState(player.StateMachine.IdlingState);
             this.gameObject.SetActive(false);
         }

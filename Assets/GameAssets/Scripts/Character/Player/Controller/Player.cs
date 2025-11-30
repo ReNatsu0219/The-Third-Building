@@ -92,6 +92,16 @@ public class Player : PhysicsCheck, ISaveable
         isDead = false;
     }
 
+    public void LandingDone()
+    {
+        StateMachine.ChangeState(StateMachine.IdlingState);
+    }
+
+    public void EatDone()
+    {
+        AnimationManager.Instance.GetPlayerAnimator().SetBool("Eat", false);
+    }
+
     #endregion
 
     #region ISaveable Methods

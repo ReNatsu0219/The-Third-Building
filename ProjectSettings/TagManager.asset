@@ -17,6 +17,7 @@ TagManager:
   - Environment
   - Player
   - Interactable
+  - Ground
   - Post Process
   - 
   - 

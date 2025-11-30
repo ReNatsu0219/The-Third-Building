@@ -12,7 +12,6 @@ public abstract class RoomBase : MonoBehaviour
     protected virtual void Awake()
     {
         roomName = gameObject.name;
-        gameObject.SetActive(is_active);
     }
 
     public virtual void ActiveRoom()
@@ -29,13 +28,11 @@ public abstract class RoomBase : MonoBehaviour
 
     public virtual void EnterRoom()
     {
-        ActiveRoom();
         is_entered = true;
     }
 
     public virtual void ExitRoom()
     {
-        DeactiveRoom();
     }
 
 }

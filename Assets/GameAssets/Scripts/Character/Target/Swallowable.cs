@@ -20,6 +20,7 @@ public abstract class Swallowable : MonoBehaviour, IEatable, ISaveable
             r.color = new Color(255f, 255f, 255f, 0f);
             canBeEaten = false;
             timer = recoverTime;
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.Bite);
             return true;
         }
         else

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StateMachine
 {
-    private StateBase currentState;
+    public StateBase currentState;
     public void ChangeState(StateBase newState)
     {
         if (currentState != null) currentState?.OnExit();

@@ -16,6 +16,7 @@ public class CollectionFruit : Swallowable
             PlayerManager.Instance.collectionNum++;
             r.color = new Color(255f, 255f, 255f, 0f);
             canBeEaten = false;
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.Bite);
             return true;
         }
         else
