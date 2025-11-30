@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSO
   <AccelerateTime>k__BackingField: 0.35
   <BaseSpeed>k__BackingField: 7
-  <JumpForce>k__BackingField: 15
+  <JumpForce>k__BackingField: 20
