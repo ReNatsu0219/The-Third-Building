@@ -49,7 +49,10 @@ public class PlayerSwallowingState : StateBase
             yield break;
 
 
-        player.swallow.gameObject.SetActive(false);
+        if (InputManager.Instance.inputActions.Gameplay.Move.ReadValue<Vector2>().y >= 0f)
+            player.swallowFwd.gameObject.SetActive(false);
+        else
+            player.swallowDwd.gameObject.SetActive(false);
         player.StateMachine.ChangeState(player.StateMachine.IdlingState);
     }
 }
