@@ -30,7 +30,7 @@ public class PlayerJumpingState : StateBase
     {
         UpdateTargetHorizontalSpeed();
 
-        if (player.Rigidbody.velocity.y <= player.OnFallingSpeedY)
+        if (player.rb.velocity.y <= player.OnFallingSpeedY)
             stateMachine.ChangeState(stateMachine.FallingState);
     }
 
@@ -56,7 +56,7 @@ public class PlayerJumpingState : StateBase
 
     private void Jump()
     {
-        player.Rigidbody.AddForce(Vector2.up * settingData.JumpForce, ForceMode2D.Impulse);
+        player.rb.AddForce(Vector2.up * settingData.JumpForce, ForceMode2D.Impulse);
     }
     protected override void OnJumpStrted(InputAction.CallbackContext context)
     {

@@ -7,14 +7,15 @@ public class SwitchFruit : Swallowable
     public float activationTimeWindow = 3f;
     public bool isActivated;
 
-    void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         SwitchFruit s = this;
         SynchronizedSwitchController.Instance.RegisterSwitch(s);
     }
-    void OnDisable()
+    protected override void OnDisable()
     {
-
+        base.OnDisable();
     }
     protected override void Update()
     {

@@ -15,7 +15,7 @@ public class PlayerMovingState : StateBase
     {
         base.OnEnter();
 
-        Debug.Log(player.InputManager.Movement);
+        //Debug.Log(player.InputManager.Movement);
         AnimationManager.Instance.GetPlayerAnimator().SetBool("isMoving", true);
     }
 

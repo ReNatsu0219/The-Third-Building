@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpeedUpFruit : Swallowable
 {
     [SerializeField] private SpeedUpBuff speedUpBuff;
-    void OnEnable()
+    protected override void OnEnable()
     {
         speedUpBuff = new SpeedUpBuff("SpeedUpBuff", -1f);
     }

@@ -9,7 +9,7 @@ public class Unswallowable : MonoBehaviour, IEatable, ISaveable
     protected float timer;
     protected bool canBeEaten = true;
     protected SpriteRenderer r;
-    void Awake()
+    protected virtual void Awake()
     {
         r = GetComponent<SpriteRenderer>();
     }
@@ -28,6 +28,9 @@ public class Unswallowable : MonoBehaviour, IEatable, ISaveable
     }
     protected virtual void Update()
     {
+        if (recoverTime <= 0f)
+            return;
+
         if (!canBeEaten && timer >= 0f)
         {
             timer -= Time.deltaTime;
@@ -55,7 +58,7 @@ public class Unswallowable : MonoBehaviour, IEatable, ISaveable
         return GetComponent<DataDefination>();
     }
 
-    public void GetSaveData(Data data)
+    public virtual void GetSaveData(Data data)
     {
         if (data.characterPosDict.ContainsKey(GetDataID().ID))
         {

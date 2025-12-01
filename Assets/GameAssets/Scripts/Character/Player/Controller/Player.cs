@@ -7,10 +7,8 @@ public class Player : PhysicsCheck, ISaveable
     public Animator animator;
     public PlayerStateMachine StateMachine { get; private set; }
     public InputManager InputManager { get; private set; }
-    public Rigidbody2D Rigidbody { get; private set; }
     public Swallowing swallowFwd;
     public Swallowing swallowDwd;
-
     [field: SerializeField] public PlayerSO SettingData { get; private set; }
     public PlayerStateReusableData ReusableData { get; private set; }
 
@@ -20,10 +18,10 @@ public class Player : PhysicsCheck, ISaveable
     [field: Header("Event Listener")]
     [SerializeField] private VoidEventSO playerDeathEvent;
     [SerializeField] private VoidEventSO loadGameEvent;
-    private void Awake()
+    protected override void Awake()
     {
         animator = GetComponent<Animator>();
-        Rigidbody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
 
         AnimationManager.Instance.SetPlayerAnimator(animator);
 
@@ -31,7 +29,9 @@ public class Player : PhysicsCheck, ISaveable
         ReusableData = new PlayerStateReusableData(this);
 
         InputManager = InputManager.Instance;
-
+    }
+    void Start()
+    {
         StateMachine.Initialize(this);
     }
     void OnEnable()
@@ -40,13 +40,16 @@ public class Player : PhysicsCheck, ISaveable
         saveable.RegisterSaveData();
 
         //测试死亡 下同
-        InputManager.Instance.inputActions.Gameplay.Die.started += TestDie;
+        //InputManager.Instance.inputActions.Gameplay.Die.started += TestDie;
 
         loadGameEvent.OnEventRaised += PlayerOnLoadGameEvent;
     }
     void OnDisable()
     {
-        InputManager.Instance.inputActions.Gameplay.Die.started -= TestDie;
+        ISaveable saveable = this;
+        saveable.UnRegisterSaveData();
+
+        //InputManager.Instance.inputActions.Gameplay.Die.started -= TestDie;
         loadGameEvent.OnEventRaised -= PlayerOnLoadGameEvent;
     }
 
@@ -115,6 +118,7 @@ public class Player : PhysicsCheck, ISaveable
 
     public void GetSaveData(Data data)
     {
+        Debug.Log("01");
         if (data.characterPosDict.ContainsKey(GetDataID().ID))
         {
             data.characterPosDict[GetDataID().ID] = new SerializableVector3(transform.position);
@@ -127,8 +131,10 @@ public class Player : PhysicsCheck, ISaveable
 
     public void LoadData(Data data)
     {
+        Debug.Log("00");
         if (data.characterPosDict.ContainsKey(GetDataID().ID))
         {
+            Debug.Log("00");
             transform.position = data.characterPosDict[GetDataID().ID].ToVector3();
         }
     }

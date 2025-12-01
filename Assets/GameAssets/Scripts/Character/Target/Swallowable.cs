@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(DataDefination))]
 public abstract class Swallowable : MonoBehaviour, IEatable, ISaveable
 {
     [SerializeField] protected float recoverTime;
@@ -9,7 +10,7 @@ public abstract class Swallowable : MonoBehaviour, IEatable, ISaveable
     protected float timer;
     protected bool canBeEaten = true;
     protected SpriteRenderer r;
-    void Awake()
+    protected virtual void Awake()
     {
         r = GetComponent<SpriteRenderer>();
     }
@@ -48,7 +49,7 @@ public abstract class Swallowable : MonoBehaviour, IEatable, ISaveable
             canBeEaten = true;
         }
     }
-    void OnEnable()
+    protected virtual void OnEnable()
     {
         ISaveable saveable = this;
         saveable.RegisterSaveData();

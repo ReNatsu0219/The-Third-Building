@@ -10,6 +10,7 @@ public class ProofOfStrength : Swallowable
         if (canBeEaten && PlayerManager.Instance.meetBoss)
         {
             PlayerManager.Instance.beStrong = true;
+            PlayerManager.Instance.strength.gameObject.SetActive(true);
             r.color = new Color(255f, 255f, 255f, 0f);
             canBeEaten = false;
             return true;

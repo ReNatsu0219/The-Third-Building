@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 [DefaultExecutionOrder(-9)]
 public class RoomManager : MonoSingleton<RoomManager>
@@ -46,7 +45,6 @@ public class RoomManager : MonoSingleton<RoomManager>
 
         CurrentRoom = rooms[StartroomName];
         CurrentRoom.EnterRoom();
-        roomChangeEventSO.RaiseEvent(CurrentRoom);
         CameraManager.Instance.SetRoom(CurrentRoom);
         AudioManager.Instance.SwitchBGM(AudioManager.Instance.BGM);
     }
@@ -66,7 +64,6 @@ public class RoomManager : MonoSingleton<RoomManager>
 
         CurrentRoom = rooms[roomname];
         CurrentRoom.EnterRoom();
-        roomChangeEventSO.RaiseEvent(CurrentRoom);
     }
 
     public RoomBase GetRoom(string roomname)
@@ -77,6 +74,12 @@ public class RoomManager : MonoSingleton<RoomManager>
         return null;
     }
 
+    public void RequestTransition(string targetRoom)
+    {
+        if (IsTransitioning) return;
+
+        StartCoroutine(DoTransition(targetRoom));
+    }
     public void RequestTransition(RoomExit exit, Player player)
     {
         if (IsTransitioning) return;
@@ -103,6 +106,36 @@ public class RoomManager : MonoSingleton<RoomManager>
             exit.TargetExit.SpawnPoint.position.x,
             exit.TargetExit.SpawnPoint.position.y + (player.GetComponent<Collider2D>().bounds.size.y) / 2
             );
+
+        UIManager.Instance.GetBlackScreen().DOFade(0f, 0.4f);
+        yield return new WaitForSeconds(0.4f);
+
+        InputManager.Instance.inputActions.Enable();
+
+        IsTransitioning = false;
+
+        roomChangeEventSO.RaiseEvent(CurrentRoom);
+    }
+    private IEnumerator DoTransition(string targetRoom)
+    {
+        IsTransitioning = true;
+
+        InputManager.Instance.inputActions.Disable();
+
+        UIManager.Instance.GetBlackScreen().DOFade(1f, 0.4f);
+        yield return new WaitForSeconds(0.45f);
+
+        SwitchtoRoom(targetRoom);
+        yield return null;
+
+        CameraManager.Instance.SetRoom(GetRoom(targetRoom));
+
+        // Player player = PlayerManager.Instance.player;
+
+        // player.transform.position = new Vector2(
+        //     playerPos.x,
+        //     playerPos.y + (player.GetComponent<Collider2D>().bounds.size.y) / 2
+        //     );
 
         UIManager.Instance.GetBlackScreen().DOFade(0f, 0.4f);
         yield return new WaitForSeconds(0.4f);

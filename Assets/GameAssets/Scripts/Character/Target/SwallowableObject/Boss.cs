@@ -4,12 +4,29 @@ using UnityEngine;
 
 public class Boss : Swallowable
 {
+    public string layerOrigin;
+    public int originLayer;
+    public string layerIgnored = "Ignore Raycast";
+    private int ignoreLayer;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        layerIgnored = "Ignore Raycast";
+        layerOrigin = "Environment";
+        if (layerIgnored != null)
+            ignoreLayer = LayerMask.NameToLayer(layerIgnored);
+
+        originLayer = LayerMask.NameToLayer(layerOrigin);
+    }
 
     public override bool BeEaten()
     {
         //物体不会设置为false，请通过动画/图案表示状态
         if (canBeEaten && PlayerManager.Instance.beStrong)
         {
+            if (ignoreLayer != 0f)
+                this.gameObject.layer = ignoreLayer;
             r.color = new Color(255f, 255f, 255f, 0f);
             canBeEaten = false;
             return true;

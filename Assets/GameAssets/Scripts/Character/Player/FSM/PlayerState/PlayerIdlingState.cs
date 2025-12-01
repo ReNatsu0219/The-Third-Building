@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,7 +25,7 @@ public class PlayerIdlingState : StateBase
 
     public override void OnPhysicsUpdate()
     {
-        if (!Mathf.Approximately(player.Rigidbody.velocity.sqrMagnitude, 0.1f))
+        if (!Mathf.Approximately(player.rb.velocity.sqrMagnitude, 0.1f))
             ChangeVelocity();
     }
     public override void OnExit()

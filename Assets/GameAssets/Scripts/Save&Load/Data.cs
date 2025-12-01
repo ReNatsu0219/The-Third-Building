@@ -4,19 +4,9 @@ using UnityEngine;
 
 public class Data
 {
-    public string sceneToSave;
+    public string roomToSave;
     public Dictionary<string, SerializableVector3> characterPosDict = new Dictionary<string, SerializableVector3>();
     public Dictionary<string, float> floatSavedData = new Dictionary<string, float>();
-    public void SaveGameScene(GameSceneSO savedScene)
-    {
-        sceneToSave = JsonUtility.ToJson(savedScene);
-    }
-    public GameSceneSO GetSavedScene()
-    {
-        var newScene = ScriptableObject.CreateInstance<GameSceneSO>();
-        JsonUtility.FromJsonOverwrite(sceneToSave, newScene);
-        return newScene;
-    }
 }
 public class SerializableVector3
 {

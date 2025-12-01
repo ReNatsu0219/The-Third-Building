@@ -42,7 +42,7 @@ public class PlayerFallingState : StateBase
     }
     private void Jump()
     {
-        player.Rigidbody.AddForce(Vector2.up * settingData.JumpForce, ForceMode2D.Impulse);
+        player.rb.AddForce(Vector2.up * settingData.JumpForce, ForceMode2D.Impulse);
     }
     protected override void OnJumpStrted(InputAction.CallbackContext context)
     {

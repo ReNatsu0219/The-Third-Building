@@ -3,12 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoSingleton<PlayerManager>, ISaveable
+public class PlayerManager : MonoSingleton<PlayerManager>, ISaveable, IResettable
 {
     public Player player;
     public float collectionNum;
     public bool meetBoss = false;
     public bool beStrong = false;
+    public bool ropeBreak = false;
+    public GameObject woodUp;
+    public GameObject woodDown;
+    public GameObject strength;
+    [SerializeField] private GameObject collectionPanel;
     [Header("Event System")]
     [SerializeField] private VoidEventSO playerDeathEvent;
     [SerializeField] private RoomChangeEventSO roomChangeEvent;
@@ -56,6 +61,23 @@ public class PlayerManager : MonoSingleton<PlayerManager>, ISaveable
         {
             meetBoss = true;
         }
+
+        if (currentRoom.roomName == "Room_menu" || currentRoom.roomName == "Room_final")
+        {
+            collectionPanel.SetActive(false);
+        }
+        else
+        {
+            collectionPanel.SetActive(true);
+        }
+    }
+
+    public void OnNewGame()
+    {
+        collectionNum = 0f;
+        meetBoss = false;
+        beStrong = false;
+        ropeBreak = false;
     }
     #endregion
 }

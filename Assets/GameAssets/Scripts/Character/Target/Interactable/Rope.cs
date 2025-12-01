@@ -3,26 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Rope : MonoBehaviour
+public class Rope : Breakable
 {
-    private List<Transform> hingePosList;
-
-    void Awake()
+    public override bool BeEaten()
     {
-        hingePosList = transform.GetComponentsInChildren<Transform>().ToList();
-        hingePosList.RemoveAt(0);
+        PlayerManager.Instance.ropeBreak = true;
+        PlayerManager.Instance.woodDown.SetActive(true);
+        PlayerManager.Instance.woodUp.SetActive(false);
+        return base.BeEaten();
     }
+    // public override void GetSaveData(Data data)
+    // {
+    //     if (data.characterPosDict.ContainsKey(GetDataID().ID))
+    //     {
+    //         data.characterPosDict[GetDataID().ID] = new SerializableVector3(transform.position);
+    //         data.floatSavedData[GetDataID().ID + "state"] = canBeEaten ? 1 : 0;
+    //     }
+    //     else
+    //     {
+    //         data.characterPosDict.Add(GetDataID().ID, new SerializableVector3(transform.position));
+    //         data.floatSavedData.Add(GetDataID().ID + "state", canBeEaten ? 1 : 0);
+    //     }
+    // }
 
-    public static Vector3 Bezier(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
-    {
-        Vector3 temp;
-        Vector3 p0p1top2 = (1 - t) * p0 + t * p1;
-        Vector3 p1p2top3 = (1 - t) * p1 + t * p2;
-        Vector3 p2p3 = (1 - t) * p2 + t * p3;
-        p0p1top2 = (1 - t) * p0p1top2 + t * p1p2top3;
-        p1p2top3 = (1 - t) * p1p2top3 + t * p2p3;
-        temp = (1 - t) * p0p1top2 + t * p1p2top3;
-        return temp;
-    }
-    //private Vector3 GetControlPoint()
+    // public override void LoadData(Data data)
+    // {
+    //     if (data.characterPosDict.ContainsKey(GetDataID().ID))
+    //     {
+    //         transform.position = data.characterPosDict[GetDataID().ID].ToVector3();
+    //         canBeEaten = data.floatSavedData[GetDataID().ID + "state"] == 0 ? false : true;
+    //         r.color = canBeEaten ? new Color(255f, 255f, 255f, 1f) : new Color(255f, 255f, 255f, 0f);
+    //     }
+    // }
 }

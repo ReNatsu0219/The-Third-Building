@@ -7,6 +7,7 @@ public class CollectionFruit : Swallowable
 {
     private bool isTimeStopped = false;
     [field: SerializeField] private VoidEventSO pauseEvent;
+    [field: SerializeField] private RoomChangeEventSO roomChangeEvent;
     [field: SerializeField] private float fallingSpeed;
     public override bool BeEaten()
     {
@@ -30,21 +31,31 @@ public class CollectionFruit : Swallowable
 
         if (isTimeStopped)
             return;
-        else
+        else if (RoomManager.Instance.CurrentRoom.roomName == "Room_12")
         {
             transform.Translate(Vector3.down * Time.deltaTime * fallingSpeed);
         }
     }
-    void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         pauseEvent.OnEventRaised += OnPauseEventRaised;
+        //roomChangeEvent.OnEventRaised += OnRoomChangeEventRaised;
     }
     protected override void OnDisable()
     {
-        pauseEvent.OnEventRaised += OnPauseEventRaised;
+        base.OnDisable();
+        pauseEvent.OnEventRaised -= OnPauseEventRaised;
+        //roomChangeEvent.OnEventRaised -= OnRoomChangeEventRaised;
     }
 
-
+    // private void OnRoomChangeEventRaised(RoomBase room)
+    // {
+    //     if (room.roomName == "Room_12" && originPos != null && originPos != Vector3.zero)
+    //     {
+    //         transform.position = originPos;
+    //     }
+    // }
 
     public override void GetSaveData(Data data)
     {

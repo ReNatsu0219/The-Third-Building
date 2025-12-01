@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[DefaultExecutionOrder(-11)]
+[DefaultExecutionOrder(-9)]
 public class InputManager : MonoSingleton<InputManager>
 {
     public PlayerInputAction inputActions;
