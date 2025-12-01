@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CollectionFruit : Swallowable
 {
+    public Vector3 originPos;
     private bool isTimeStopped = false;
     [field: SerializeField] private VoidEventSO pauseEvent;
     [field: SerializeField] private RoomChangeEventSO roomChangeEvent;
@@ -40,22 +41,22 @@ public class CollectionFruit : Swallowable
     {
         base.OnEnable();
         pauseEvent.OnEventRaised += OnPauseEventRaised;
-        //roomChangeEvent.OnEventRaised += OnRoomChangeEventRaised;
+        roomChangeEvent.OnEventRaised += OnRoomChangeEventRaised;
     }
     protected override void OnDisable()
     {
         base.OnDisable();
         pauseEvent.OnEventRaised -= OnPauseEventRaised;
-        //roomChangeEvent.OnEventRaised -= OnRoomChangeEventRaised;
+        roomChangeEvent.OnEventRaised -= OnRoomChangeEventRaised;
     }
 
-    // private void OnRoomChangeEventRaised(RoomBase room)
-    // {
-    //     if (room.roomName == "Room_12" && originPos != null && originPos != Vector3.zero)
-    //     {
-    //         transform.position = originPos;
-    //     }
-    // }
+    private void OnRoomChangeEventRaised(RoomBase room)
+    {
+        if (room.roomName == "Room_12" && originPos != null && originPos != Vector3.zero)
+        {
+            transform.position = originPos;
+        }
+    }
 
     public override void GetSaveData(Data data)
     {
@@ -75,7 +76,6 @@ public class CollectionFruit : Swallowable
     {
         if (data.characterPosDict.ContainsKey(GetDataID().ID))
         {
-            transform.position = data.characterPosDict[GetDataID().ID].ToVector3();
             canBeEaten = data.floatSavedData[GetDataID().ID + "state"] == 0 ? false : true;
             r.color = canBeEaten ? new Color(255f, 255f, 255f, 1f) : new Color(255f, 255f, 255f, 0f);
         }

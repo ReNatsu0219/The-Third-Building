@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : MonoSingleton<PlayerManager>, ISaveable, IResettable
@@ -21,10 +18,16 @@ public class PlayerManager : MonoSingleton<PlayerManager>, ISaveable, IResettabl
     void OnEnable()
     {
         roomChangeEvent.OnEventRaised += OnRoomChangeEvent;
+
+        ISaveable saveable = this;
+        saveable.RegisterSaveData();
     }
     void OnDisable()
     {
         roomChangeEvent.OnEventRaised -= OnRoomChangeEvent;
+
+        ISaveable saveable = this;
+        saveable.UnRegisterSaveData();
     }
 
 
@@ -36,7 +39,8 @@ public class PlayerManager : MonoSingleton<PlayerManager>, ISaveable, IResettabl
 
     public void GetSaveData(Data data)
     {
-        if (data.characterPosDict.ContainsKey(GetDataID().ID))
+        Debug.Log("111");
+        if (data.floatSavedData.ContainsKey(GetDataID().ID))
         {
             data.floatSavedData[GetDataID().ID] = collectionNum;
         }
@@ -48,7 +52,8 @@ public class PlayerManager : MonoSingleton<PlayerManager>, ISaveable, IResettabl
 
     public void LoadData(Data data)
     {
-        if (data.characterPosDict.ContainsKey(GetDataID().ID))
+        Debug.Log("110");
+        if (data.floatSavedData.ContainsKey(GetDataID().ID))
         {
             collectionNum = data.floatSavedData[GetDataID().ID];
         }
